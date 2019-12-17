@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace OOP_laba4
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         public Storage<Figure> FigureStorage;
 
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             FigureStorage = new Storage<Figure>();
@@ -28,21 +28,10 @@ namespace OOP_laba4
             var g = e.Graphics;
             g.TranslateTransform(OffsetPaintBox.X, OffsetPaintBox.Y);
 
-            Figure figure;
-            Painter painter;
             for(FigureStorage.First(); !FigureStorage.EOL; FigureStorage.Next())
             {
-                figure = FigureStorage.Current();
-                if(figure is Circle circle)
-                {
-                    painter = new CirclePainter(g);
-                    painter.Paint(circle);
-                }
-                if (figure is Rectangle rectangle)
-                {
-                    painter = new RectanglePainter(g);
-                    painter.Paint(rectangle);
-                }
+                //FigureStorage.Current().Paint(g);
+                FigureStorage.Current().Paint(g, -OffsetPaintBox.X, -OffsetPaintBox.Y, -OffsetPaintBox.X + PaintPanel.Width, -OffsetPaintBox.Y + PaintPanel.Height);
             }
 
             CountLbl.Text = $"Фигур: {FigureStorage.Count}";
@@ -54,8 +43,8 @@ namespace OOP_laba4
             {
                 if(!SelectFigure(e.X - OffsetPaintBox.X, e.Y - OffsetPaintBox.Y))
                 {
-                    if (CircleRB.Checked)
-                        FigureStorage.AddLast(new Circle(e.X - OffsetPaintBox.X, e.Y - OffsetPaintBox.Y, (int)RadiusNum.Value));
+                    if (EllipseRB.Checked)
+                        FigureStorage.AddLast(new Ellipse(e.X - OffsetPaintBox.X, e.Y - OffsetPaintBox.Y, (int)HeightNum.Value, (int)WidthNum.Value));
                     if (RectangleRB.Checked)
                         FigureStorage.AddLast(new Rectangle(e.X - OffsetPaintBox.X, e.Y - OffsetPaintBox.Y, (int)HeightNum.Value, (int)WidthNum.Value));
                 }        
@@ -227,12 +216,15 @@ namespace OOP_laba4
                 figure = FigureStorage.Current();
                 if (figure.Selected)
                 {
-                    if (figure is Circle circle)
-                        circle.Radius = (int)SizeNum.Value;
+                    if (figure is Ellipse ellipse)
+                    {
+                        ellipse.Width = (int)WidthNum.Value;
+                        ellipse.Height = (int)HeightNum.Value;
+                    }     
                     if (figure is Rectangle rectangle)
                     {
-                        rectangle.Width  = (int)SizeNum.Value;
-                        rectangle.Height = (int)SizeNum.Value;
+                        rectangle.Width  = (int)WidthNum.Value;
+                        rectangle.Height = (int)HeightNum.Value;
                     }
                     figure.Deselect();
                 }

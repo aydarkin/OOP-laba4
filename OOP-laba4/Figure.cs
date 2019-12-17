@@ -27,7 +27,8 @@ namespace OOP_laba4
 
         public static Color StrokeColorDefault = Color.Black;
 
-
-        public virtual bool isPointInFigure(int x, int y) => false;
+        public abstract void Paint(Graphics g);
+        public abstract void Paint(Graphics g, int leftLimite, int upLimite, int rightLimite, int downLimite);
+        public abstract bool isPointInFigure(int x, int y);
     }
 }

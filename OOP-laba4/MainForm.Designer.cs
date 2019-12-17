@@ -1,6 +1,6 @@
 ﻿namespace OOP_laba4
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -39,23 +39,18 @@
             this.ChooseFigureBox = new System.Windows.Forms.GroupBox();
             this.WidthLbl = new System.Windows.Forms.Label();
             this.HeightLbl = new System.Windows.Forms.Label();
-            this.RadiusLbl = new System.Windows.Forms.Label();
             this.WidthNum = new System.Windows.Forms.NumericUpDown();
             this.HeightNum = new System.Windows.Forms.NumericUpDown();
-            this.RadiusNum = new System.Windows.Forms.NumericUpDown();
             this.RectangleRB = new System.Windows.Forms.RadioButton();
-            this.CircleRB = new System.Windows.Forms.RadioButton();
+            this.EllipseRB = new System.Windows.Forms.RadioButton();
             this.CountLbl = new System.Windows.Forms.Label();
             this.InfoLbl = new System.Windows.Forms.Label();
             this.BeginCoordLbl = new System.Windows.Forms.Label();
-            this.SizeNum = new System.Windows.Forms.NumericUpDown();
             this.SetSizeBtn = new System.Windows.Forms.Button();
             this.contextMenu.SuspendLayout();
             this.ChooseFigureBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNum)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RadiusNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SizeNum)).BeginInit();
             this.SuspendLayout();
             // 
             // PaintPanel
@@ -99,7 +94,7 @@
             // 
             // RemoveBtn
             // 
-            this.RemoveBtn.Location = new System.Drawing.Point(12, 363);
+            this.RemoveBtn.Location = new System.Drawing.Point(12, 382);
             this.RemoveBtn.Name = "RemoveBtn";
             this.RemoveBtn.Size = new System.Drawing.Size(210, 30);
             this.RemoveBtn.TabIndex = 1;
@@ -113,7 +108,7 @@
             // 
             // SetColorBtn
             // 
-            this.SetColorBtn.Location = new System.Drawing.Point(12, 327);
+            this.SetColorBtn.Location = new System.Drawing.Point(12, 346);
             this.SetColorBtn.Name = "SetColorBtn";
             this.SetColorBtn.Size = new System.Drawing.Size(210, 30);
             this.SetColorBtn.TabIndex = 1;
@@ -123,17 +118,11 @@
             // 
             // ChooseFigureBox
             // 
-            this.ChooseFigureBox.Controls.Add(this.WidthLbl);
-            this.ChooseFigureBox.Controls.Add(this.HeightLbl);
-            this.ChooseFigureBox.Controls.Add(this.RadiusLbl);
-            this.ChooseFigureBox.Controls.Add(this.WidthNum);
-            this.ChooseFigureBox.Controls.Add(this.HeightNum);
-            this.ChooseFigureBox.Controls.Add(this.RadiusNum);
             this.ChooseFigureBox.Controls.Add(this.RectangleRB);
-            this.ChooseFigureBox.Controls.Add(this.CircleRB);
+            this.ChooseFigureBox.Controls.Add(this.EllipseRB);
             this.ChooseFigureBox.Location = new System.Drawing.Point(12, 65);
             this.ChooseFigureBox.Name = "ChooseFigureBox";
-            this.ChooseFigureBox.Size = new System.Drawing.Size(210, 234);
+            this.ChooseFigureBox.Size = new System.Drawing.Size(210, 142);
             this.ChooseFigureBox.TabIndex = 2;
             this.ChooseFigureBox.TabStop = false;
             this.ChooseFigureBox.Text = "Выберите фигуру для добавления";
@@ -141,7 +130,7 @@
             // WidthLbl
             // 
             this.WidthLbl.AutoSize = true;
-            this.WidthLbl.Location = new System.Drawing.Point(38, 200);
+            this.WidthLbl.Location = new System.Drawing.Point(28, 259);
             this.WidthLbl.Name = "WidthLbl";
             this.WidthLbl.Size = new System.Drawing.Size(46, 13);
             this.WidthLbl.TabIndex = 2;
@@ -150,24 +139,15 @@
             // HeightLbl
             // 
             this.HeightLbl.AutoSize = true;
-            this.HeightLbl.Location = new System.Drawing.Point(38, 164);
+            this.HeightLbl.Location = new System.Drawing.Point(28, 223);
             this.HeightLbl.Name = "HeightLbl";
             this.HeightLbl.Size = new System.Drawing.Size(45, 13);
             this.HeightLbl.TabIndex = 2;
             this.HeightLbl.Text = "Высота";
             // 
-            // RadiusLbl
-            // 
-            this.RadiusLbl.AutoSize = true;
-            this.RadiusLbl.Location = new System.Drawing.Point(38, 70);
-            this.RadiusLbl.Name = "RadiusLbl";
-            this.RadiusLbl.Size = new System.Drawing.Size(43, 13);
-            this.RadiusLbl.TabIndex = 2;
-            this.RadiusLbl.Text = "Радиус";
-            // 
             // WidthNum
             // 
-            this.WidthNum.Location = new System.Drawing.Point(107, 198);
+            this.WidthNum.Location = new System.Drawing.Point(97, 257);
             this.WidthNum.Maximum = new decimal(new int[] {
             300,
             0,
@@ -189,7 +169,7 @@
             // 
             // HeightNum
             // 
-            this.HeightNum.Location = new System.Drawing.Point(107, 162);
+            this.HeightNum.Location = new System.Drawing.Point(97, 221);
             this.HeightNum.Maximum = new decimal(new int[] {
             300,
             0,
@@ -209,49 +189,27 @@
             0,
             0});
             // 
-            // RadiusNum
-            // 
-            this.RadiusNum.Location = new System.Drawing.Point(107, 68);
-            this.RadiusNum.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.RadiusNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.RadiusNum.Name = "RadiusNum";
-            this.RadiusNum.Size = new System.Drawing.Size(62, 20);
-            this.RadiusNum.TabIndex = 1;
-            this.RadiusNum.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            // 
             // RectangleRB
             // 
             this.RectangleRB.AutoSize = true;
-            this.RectangleRB.Location = new System.Drawing.Point(19, 120);
+            this.RectangleRB.Location = new System.Drawing.Point(19, 55);
             this.RectangleRB.Name = "RectangleRB";
             this.RectangleRB.Size = new System.Drawing.Size(105, 17);
             this.RectangleRB.TabIndex = 0;
             this.RectangleRB.Text = "Прямоугольник";
             this.RectangleRB.UseVisualStyleBackColor = true;
             // 
-            // CircleRB
+            // EllipseRB
             // 
-            this.CircleRB.AutoSize = true;
-            this.CircleRB.Checked = true;
-            this.CircleRB.Location = new System.Drawing.Point(19, 32);
-            this.CircleRB.Name = "CircleRB";
-            this.CircleRB.Size = new System.Drawing.Size(48, 17);
-            this.CircleRB.TabIndex = 0;
-            this.CircleRB.TabStop = true;
-            this.CircleRB.Text = "Круг";
-            this.CircleRB.UseVisualStyleBackColor = true;
+            this.EllipseRB.AutoSize = true;
+            this.EllipseRB.Checked = true;
+            this.EllipseRB.Location = new System.Drawing.Point(19, 32);
+            this.EllipseRB.Name = "EllipseRB";
+            this.EllipseRB.Size = new System.Drawing.Size(62, 17);
+            this.EllipseRB.TabIndex = 0;
+            this.EllipseRB.TabStop = true;
+            this.EllipseRB.Text = "Эллипс";
+            this.EllipseRB.UseVisualStyleBackColor = true;
             // 
             // CountLbl
             // 
@@ -280,33 +238,11 @@
             this.BeginCoordLbl.TabIndex = 4;
             this.BeginCoordLbl.Text = "Начало координат: 0, 0";
             // 
-            // SizeNum
-            // 
-            this.SizeNum.Location = new System.Drawing.Point(160, 432);
-            this.SizeNum.Maximum = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.SizeNum.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.SizeNum.Name = "SizeNum";
-            this.SizeNum.Size = new System.Drawing.Size(62, 20);
-            this.SizeNum.TabIndex = 1;
-            this.SizeNum.Value = new decimal(new int[] {
-            25,
-            0,
-            0,
-            0});
-            // 
             // SetSizeBtn
             // 
-            this.SetSizeBtn.Location = new System.Drawing.Point(12, 425);
+            this.SetSizeBtn.Location = new System.Drawing.Point(11, 310);
             this.SetSizeBtn.Name = "SetSizeBtn";
-            this.SetSizeBtn.Size = new System.Drawing.Size(125, 30);
+            this.SetSizeBtn.Size = new System.Drawing.Size(211, 30);
             this.SetSizeBtn.TabIndex = 1;
             this.SetSizeBtn.Text = "Задать размер";
             this.SetSizeBtn.UseVisualStyleBackColor = true;
@@ -317,10 +253,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(909, 537);
+            this.Controls.Add(this.WidthLbl);
+            this.Controls.Add(this.HeightLbl);
             this.Controls.Add(this.BeginCoordLbl);
+            this.Controls.Add(this.WidthNum);
+            this.Controls.Add(this.HeightNum);
             this.Controls.Add(this.InfoLbl);
             this.Controls.Add(this.CountLbl);
-            this.Controls.Add(this.SizeNum);
             this.Controls.Add(this.ChooseFigureBox);
             this.Controls.Add(this.SetColorBtn);
             this.Controls.Add(this.SetSizeBtn);
@@ -336,8 +275,6 @@
             this.ChooseFigureBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNum)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.HeightNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RadiusNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SizeNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,20 +288,17 @@
         private System.Windows.Forms.Button SetColorBtn;
         private System.Windows.Forms.GroupBox ChooseFigureBox;
         private System.Windows.Forms.RadioButton RectangleRB;
-        private System.Windows.Forms.RadioButton CircleRB;
+        private System.Windows.Forms.RadioButton EllipseRB;
         private System.Windows.Forms.Label WidthLbl;
         private System.Windows.Forms.Label HeightLbl;
-        private System.Windows.Forms.Label RadiusLbl;
         private System.Windows.Forms.NumericUpDown WidthNum;
         private System.Windows.Forms.NumericUpDown HeightNum;
-        private System.Windows.Forms.NumericUpDown RadiusNum;
         private System.Windows.Forms.Label CountLbl;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem удалитьВыделенныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem изменитьЦветToolStripMenuItem;
         private System.Windows.Forms.Label InfoLbl;
         private System.Windows.Forms.Label BeginCoordLbl;
-        private System.Windows.Forms.NumericUpDown SizeNum;
         private System.Windows.Forms.Button SetSizeBtn;
     }
 }

@@ -32,5 +32,18 @@ namespace OOP_laba4
             else
                 return false;
         }
+
+        public override void Paint(Graphics g)
+        {
+            g.FillRectangle(new SolidBrush(this.Color), X, Y, Width, Height);
+            if (Selected)
+                g.DrawRectangle(new Pen(this.StrokeColor, 3), X, Y, Width, Height);
+        }
+
+        public override void Paint(Graphics g, int leftLimite, int upLimite, int rightLimite, int downLimite)
+        {
+            //TODO
+            Paint(g);
+        }
     }
 }
