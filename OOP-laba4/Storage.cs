@@ -114,6 +114,50 @@ namespace OOP_laba4
         }
 
         /// <summary>
+        /// Вставляет элемента после указанного
+        /// </summary>
+        /// <param name="item">вставляемый элемент</param>
+        /// <param name="itemAfter">элемент, после которого идет вставка</param>
+        public void Insert(T item, T itemAfter)
+        {
+            for (First(); !EOL; Next())
+            {
+                if (current.Value.Equals(itemAfter))
+                {
+                    var newNode = new StorageNode(item);
+
+                    if (current.Next != null)
+                    {
+                        current.Next.Prev = newNode;
+                        newNode.Next = current.Next;
+
+                    }
+                    else
+                        last = newNode;
+
+                    newNode.Prev = current;
+                    current.Next = newNode;
+                    count++;
+                    return;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Вставляет список элементов после указанного
+        /// </summary>
+        /// <param name="items">список вставляемых элементов</param>
+        /// <param name="itemAfter">элемент, после которого идет вставка</param>
+        public void Insert(Storage<T> items, T itemAfter)
+        {
+            for(items.Last(); !items.EOL; items.Prev())
+            {
+                Insert(items.current.Value, itemAfter);
+            }
+        }
+
+        /// <summary>
         /// Удаляет текущий элемент списка
         /// </summary>
         public void Remove()
@@ -148,6 +192,55 @@ namespace OOP_laba4
                 }
             }
         }
+
+        /// <summary>
+        /// Удаляет указанный элемент из списка
+        /// </summary>
+        /// <param name="item">удаляемый элемент</param>
+        public void Remove(T item)
+        {
+            for (First(); !EOL; Next())
+            {
+                if (Current().Equals(item))
+                {
+                    Remove();
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Заменить элемент другим
+        /// </summary>
+        /// <param name="oldItem">старый</param>
+        /// <param name="newItem">новый</param>
+        public void Replace(T oldItem, T newItem)
+        {
+            var newNode = new StorageNode(newItem);
+            for (First(); !EOL; Next())
+            {
+                if (Current().Equals(oldItem))
+                {
+                    newNode.Next = current.Next;
+                    newNode.Prev = current.Prev;
+                    current = newNode;
+                    return;
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Очистить хранилище
+        /// </summary>
+        public void Clear()
+        {
+            First();
+            while (!EOL)
+                Remove();
+
+        }
+
 
     }
 }
