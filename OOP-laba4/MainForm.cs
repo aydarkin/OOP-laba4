@@ -370,5 +370,22 @@ namespace OOP_laba4
             UngroupFigures();
             PaintPanel.Refresh();
         }
+
+        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void цветToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetColorSelectedFigures();
+            PaintPanel.Refresh();
+        }
+
+        private void удалитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveSelectedFigures();
+            PaintPanel.Refresh();
+        }
     }
 }

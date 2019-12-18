@@ -24,6 +24,7 @@ namespace OOP_laba4.Figures
         {
             figure.Deselect();
             figures.AddLast(figure);
+            setSize();
         }
 
         public void Remove(Figure figure)
@@ -108,6 +109,7 @@ namespace OOP_laba4.Figures
         {
             for (figures.First(); !figures.EOL; figures.Next())
                 figures.Current().Move(dx, dy);
+            setSize();
         }
 
         public override void Move(int dx, int dy, int leftLimite, int upLimite, int rightLimite, int downLimite)
