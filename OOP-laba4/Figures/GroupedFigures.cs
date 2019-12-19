@@ -89,20 +89,20 @@ namespace OOP_laba4.Figures
             {
                 figure = figures.Current();
 
-                if (left > figure.X)
-                    left = figure.X;
-                if (right < figure.X)
-                    right = figure.X;
-                if (up > figure.Y)
-                    up = figure.Y;
-                if (down < figure.Y)
-                    down = figure.Y;
+                if (left > figure.X - figure.Width/2)
+                    left = figure.X - figure.Width / 2;
+                if (right < figure.X + figure.Width / 2)
+                    right = figure.X + figure.Width / 2;
+                if (up > figure.Y - figure.Height / 2)
+                    up = figure.Y - figure.Height / 2;
+                if (down < figure.Y + figure.Height / 2)
+                    down = figure.Y + figure.Height / 2;
             }
 
-            Width = right - left + figure.Width;
-            Height = down - up + figure.Height;
-            X = left - figure.Width / 2 + Width / 2;
-            Y = up - figure.Height / 2 + Height / 2;
+            Width = right - left;
+            Height = down - up;
+            X = left + Width / 2;
+            Y = up + Height / 2;
         }
 
         public override void Move(int dx, int dy)
