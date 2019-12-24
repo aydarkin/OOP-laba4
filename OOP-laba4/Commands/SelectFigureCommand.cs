@@ -52,15 +52,22 @@ namespace OOP_laba4.Commands
 
         public void Execute()
         {
-            oldSelected = figure.Selected;
-            figure.Selected = selected;
-            figures.NotifyAll();
+            if(figure != null)
+            {
+                oldSelected = figure.Selected;
+                figure.Selected = selected;
+                figures.NotifyAll();
+            }  
         }
 
         public void Unexecute()
         {
-            figure.Selected = oldSelected;
-            figures.NotifyAll();
+            if (figure != null)
+            {
+                figure.Selected = oldSelected;
+                figures.NotifyAll();
+            }
+                
         }
     }
 }

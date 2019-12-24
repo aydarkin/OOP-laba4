@@ -16,7 +16,7 @@ namespace OOP_laba4.Figures
         public int Height;
 
         public bool Selected;
-        public bool isSticky { get; private set; }
+        public bool isSticky { get; protected set; }
 
         public Color Color = Color.Coral;
         public Color StrokeColor = StrokeColorDefault;
@@ -125,6 +125,7 @@ namespace OOP_laba4.Figures
             Height = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             Color = Color.FromArgb(Convert.ToInt32(sr.ReadLine().Split('=')[1]));
             StrokeColor = Color.FromArgb(Convert.ToInt32(sr.ReadLine().Split('=')[1]));
+            isSticky = Convert.ToBoolean(sr.ReadLine().Split('=')[1]);
         }
         public virtual void Save(StreamWriter sw)
         {
@@ -134,6 +135,7 @@ namespace OOP_laba4.Figures
             sw.WriteLine($"height={Height}");
             sw.WriteLine($"color={Color.ToArgb()}");
             sw.WriteLine($"stroke={StrokeColor.ToArgb()}");
+            sw.WriteLine($"is_sticky={isSticky}");
         }
 
         List<IObserver> observers = new List<IObserver>();

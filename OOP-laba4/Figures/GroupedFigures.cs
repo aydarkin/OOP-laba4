@@ -45,7 +45,8 @@ namespace OOP_laba4.Figures
         public override void Load(StreamReader sr)
         {
             figures.Clear();
-            var count = Convert.ToInt32(sr.ReadLine());
+            isSticky = Convert.ToBoolean(sr.ReadLine().Split('=')[1]);
+            var count = Convert.ToInt32(sr.ReadLine().Split('=')[1]);
             IFigureFactory factory = new FigureFactory();
             Figure figure;
             for (int i = 0; i < count; i++)
@@ -60,7 +61,8 @@ namespace OOP_laba4.Figures
         public override void Save(StreamWriter sw)
         {
             sw.WriteLine("Group");
-            sw.WriteLine(figures.Count);
+            sw.WriteLine($"is_sticky={isSticky}");
+            sw.WriteLine($"count={figures.Count}");
             for (figures.First(); !figures.EOL; figures.Next())
             {
                 figures.Current().Save(sw);

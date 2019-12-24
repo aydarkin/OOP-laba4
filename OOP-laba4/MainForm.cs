@@ -176,6 +176,11 @@ namespace OOP_laba4
                     DoCommand(new StickSelectedFiguresCommand(FigureStorage));
                     break;
                 case Keys.A:
+                    if (e.Control)
+                    {
+                        SelectAll();
+                        return;
+                    }
                     if (CheckBeyonds.Checked)
                         DoCommand(new TransferFiguresCommand(FigureStorage, FigureStep, Directions.Left, -OffsetPaintBox.X, -OffsetPaintBox.Y, -OffsetPaintBox.X + PaintPanel.Width, -OffsetPaintBox.Y + PaintPanel.Height));
                     else
@@ -238,6 +243,7 @@ namespace OOP_laba4
                 PaintPanel.Refresh();
             }
             CoordsLbl.Text = $"x:{OffsetPaintBox.X + e.Location.X}, y:{OffsetPaintBox.Y + e.Location.Y}";
+            FigureCountLbl.Text = $"Фигур: {FigureStorage.Count}";
         }
 
         private void PaintPanel_MouseDown(object sender, MouseEventArgs e)
@@ -417,6 +423,39 @@ namespace OOP_laba4
         private void UnsetStickyBtn_Click(object sender, EventArgs e)
         {
             DoCommand(new SetStickySelectedFiguresCommand(FigureStorage, false));
+        }
+
+        private void сделатьЛипкимToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoCommand(new SetStickySelectedFiguresCommand(FigureStorage, true));
+        }
+
+        private void убратьЛипкостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoCommand(new SetStickySelectedFiguresCommand(FigureStorage, false));
+        }
+
+        private void сгруппироватьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DoCommand(new GroupSelectedFiguresCommand(FigureStorage));
+        }
+
+        private void разгруппироватьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DoCommand(new UngroupSelectedFiguresCommand(FigureStorage));
+        }
+
+        private void выделитьВсехToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectAll();
+        }
+
+        protected void SelectAll()
+        {
+            for (var it = FigureStorage.CreateIterator(); !it.EOL; it.Next())
+            {
+                DoCommand(new SelectFigureCommand(FigureStorage, it.GetCurrent().Value, true));
+            }
         }
     }
 }
