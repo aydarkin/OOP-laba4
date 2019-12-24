@@ -9,6 +9,6 @@ namespace OOP_laba4.Factories
 {
     interface IFigureFactory
     {
-        Figure CreateFigure(string nameFigure);
+        Figure CreateFigure(string nameFigure, int x = 0, int y = 0, int width = 1, int height = 1);
     }
 }

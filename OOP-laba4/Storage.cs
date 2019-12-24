@@ -5,34 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace OOP_laba4
-{
-    public class Storage<T>
+{ 
+    public class StorageNode<T>
     {
-        public class StorageNode
-        {
-            public StorageNode Next;
-            public StorageNode Prev;
-            public T Value;
+        public StorageNode<T> Next;
+        public StorageNode<T> Prev;
+        public T Value;
 
-            public StorageNode(T value)
-            {
-                Value = value;
-            }
+        public StorageNode(T value)
+        {
+            Value = value;
+        }
+    }
+
+    public class Storage<T> : IObservable
+    {
+
+        public StorageIterator<T> CreateIterator()
+        {
+            return new StorageIterator<T>(first, last);
         }
 
-        private StorageNode first;
-        public void First()
+        private StorageNode<T> first;
+        public StorageNode<T> First()
         {
             current = first;
+            return first;
         }
 
-        private StorageNode last;
-        public void Last()
+        private StorageNode<T> last;
+        public StorageNode<T> Last()
         {
             current = last;
+            return last;
         }
 
-        private StorageNode current;
+        private StorageNode<T> current;
         /// <summary>
         /// Получить текущий элемент списка
         /// </summary>
@@ -77,7 +85,7 @@ namespace OOP_laba4
         /// <param name="item"></param>
         public void AddFirst(T item)
         {
-            var newNode = new StorageNode(item);
+            var newNode = new StorageNode<T>(item);
             if (count == 0)
             {
                 current = newNode;
@@ -90,6 +98,7 @@ namespace OOP_laba4
             }
             first = newNode;
             count++;
+            NotifyAll();
         }
 
         /// <summary>
@@ -98,7 +107,7 @@ namespace OOP_laba4
         /// <param name="item">Новый элемент списка</param>
         public void AddLast(T item)
         {
-            var newNode = new StorageNode(item);
+            var newNode = new StorageNode<T>(item);
             if (count == 0)
             {
                 first = newNode;
@@ -111,6 +120,7 @@ namespace OOP_laba4
             }
             last = newNode;
             count++;
+            NotifyAll();
         }
 
         /// <summary>
@@ -120,28 +130,48 @@ namespace OOP_laba4
         /// <param name="itemAfter">элемент, после которого идет вставка</param>
         public void Insert(T item, T itemAfter)
         {
-            for (First(); !EOL; Next())
+            var iter = CreateIterator();
+            for (iter.First(); !iter.EOL; iter.Next())
             {
-                if (current.Value.Equals(itemAfter))
+                if (iter.GetCurrent().Value.Equals(itemAfter))
                 {
-                    var newNode = new StorageNode(item);
-
-                    if (current.Next != null)
-                    {
-                        current.Next.Prev = newNode;
-                        newNode.Next = current.Next;
-
-                    }
-                    else
-                        last = newNode;
-
-                    newNode.Prev = current;
-                    current.Next = newNode;
-                    count++;
+                    var temp = current; 
+                    current = iter.GetCurrent();
+                    Insert(item);
+                    current = temp;
+                    NotifyAll();
                     return;
                 }
+            }
+            NotifyAll();
+        }
+
+        /// <summary>
+        /// Вставляет элемента после текущего
+        /// </summary>
+        /// <param name="item">вставляемый элемент</param>
+        public void Insert(T item)
+        {
+            var newNode = new StorageNode<T>(item);
+            if (count == 0)
+            {
+                AddLast(item);
+                return;
+            }
+
+            if (current.Next != null)
+            {
+                current.Next.Prev = newNode;
+                newNode.Next = current.Next;
 
             }
+            else
+                last = newNode;
+
+            newNode.Prev = current;
+            current.Next = newNode;
+            count++;
+            NotifyAll();
         }
 
         /// <summary>
@@ -154,6 +184,18 @@ namespace OOP_laba4
             for(items.Last(); !items.EOL; items.Prev())
             {
                 Insert(items.current.Value, itemAfter);
+            }
+        }
+
+        /// <summary>
+        /// Вставляет список элементов после текущего
+        /// </summary>
+        /// <param name="items">список вставляемых элементов</param>
+        public void Insert(Storage<T> items)
+        {
+            for (items.Last(); !items.EOL; items.Prev())
+            {
+                Insert(items.current.Value);
             }
         }
 
@@ -190,6 +232,7 @@ namespace OOP_laba4
                     current.Prev.Next = current.Next;
                     Next();
                 }
+                NotifyAll();
             }
         }
 
@@ -199,11 +242,18 @@ namespace OOP_laba4
         /// <param name="item">удаляемый элемент</param>
         public void Remove(T item)
         {
-            for (First(); !EOL; Next())
+            var iter = CreateIterator();
+            for (iter.First(); !iter.EOL; iter.Next())
             {
-                if (Current().Equals(item))
+                if (iter.GetCurrent().Value.Equals(item))
                 {
+                    if (current == null)
+                        current = first;
+                    var temp = current;
+                    current = iter.GetCurrent();
                     Remove();
+                    current = temp;
+                    NotifyAll();
                     return;
                 }
             }
@@ -216,14 +266,17 @@ namespace OOP_laba4
         /// <param name="newItem">новый</param>
         public void Replace(T oldItem, T newItem)
         {
-            var newNode = new StorageNode(newItem);
-            for (First(); !EOL; Next())
+            var newNode = new StorageNode<T>(newItem);
+            var iter = CreateIterator();
+            for (iter.First(); !iter.EOL; iter.Next())
             {
-                if (Current().Equals(oldItem))
+                if (iter.GetCurrent().Value.Equals(oldItem))
                 {
-                    newNode.Next = current.Next;
-                    newNode.Prev = current.Prev;
-                    current = newNode;
+                    var temp = current;
+                    current = iter.GetCurrent();
+                    current.Value = newItem;
+                    current = temp;
+                    NotifyAll();
                     return;
                 }
             }
@@ -238,9 +291,41 @@ namespace OOP_laba4
             First();
             while (!EOL)
                 Remove();
-
         }
 
+        List<IObserver> observers = new List<IObserver>();
+        public void AddObserver(IObserver observer)
+        {
+            observers.Add(observer);
+            observer.GetSubjects().Add(this);
+        }
 
+        public void RemoveObserver(IObserver observer)
+        {
+            observers.Remove(observer);
+            observer.GetSubjects().Remove(this);
+        }
+
+        public void NotifyAll(string property = null, object[] args = null)
+        {
+            foreach (var ob in observers)
+            {
+                ob.OnPropertyChanged(this);
+            }
+        }
+
+        public bool isObserver(IObserver observer)
+        {
+            return observers.Contains(observer);
+        }
+
+        public void RemoveAllObserver()
+        {
+            observers.Clear();
+        }
+        public List<IObserver> GetObservers()
+        {
+            return observers;
+        }
     }
 }

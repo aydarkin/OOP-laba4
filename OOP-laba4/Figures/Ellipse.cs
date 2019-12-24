@@ -16,36 +16,25 @@ namespace OOP_laba4.Figures
 
         public Ellipse()
         {
-            X = 0;
-            Y = 0;
             Height = DefaultHeight;
             Width = DefaultWidth;
         }
 
-        public Ellipse(int x, int y, int width, int height)
-        {
-            X = x;
-            Y = y;
-            Height = height;
-            Width = width;
-        }
+        public Ellipse(int x, int y, int width, int height): base(x, y, width, height) { }
 
-        public Ellipse(int x, int y, int height, int width, Color color) : this(x, y, height, width)
-        {
-            Color = color;
-        }
+        public Ellipse(int x, int y, int height, int width, Color color) : base(x, y, height, width, color) { }
 
         public override void Paint(Graphics g)
         {
             g.SmoothingMode = SmoothingMode.AntiAlias;
-            var strokeColor = this.StrokeColor;
+            var color = this.Color;
 
             if (isSticky)
-                strokeColor = Color.LightGreen;
+                color = Color.LightGreen;
 
-            g.FillEllipse(new SolidBrush(this.Color), X - (Width / 2), Y - (Height / 2), Width, Height);
+            g.FillEllipse(new SolidBrush(color), X - (Width / 2), Y - (Height / 2), Width, Height);
             if (Selected)
-                g.DrawEllipse(new Pen(strokeColor, 3), X - (Width / 2), Y - (Height / 2), Width, Height);
+                g.DrawEllipse(new Pen(StrokeColor, 3), X - (Width / 2), Y - (Height / 2), Width, Height);
         }
 
 
@@ -54,37 +43,15 @@ namespace OOP_laba4.Figures
             return Math.Pow(x - this.X, 2) / Math.Pow(Width/2, 2) + Math.Pow(y - this.Y, 2) / Math.Pow(Height/2, 2) <= 1;
         }
 
-        public override void Load(StreamReader sr)
-        {
-            X = Convert.ToInt32(sr.ReadLine());
-            Y = Convert.ToInt32(sr.ReadLine());
-            Width = Convert.ToInt32(sr.ReadLine());
-            Height = Convert.ToInt32(sr.ReadLine());
-        }
-
         public override void Save(StreamWriter sw)
         {
-            sw.WriteLine("E");
-            sw.WriteLine(X);
-            sw.WriteLine(Y);
-            sw.WriteLine(Width);
-            sw.WriteLine(Height);
+            sw.WriteLine("Ellipse");
+            base.Save(sw);
         }
 
-        public override void Move(int dx, int dy, int leftLimite, int upLimite, int rightLimite, int downLimite)
+        public override string ToString()
         {
-            Move(dx, dy);
-            if (Width / 2 > X - leftLimite)
-                X = leftLimite + Width / 2;
-
-            if (Height / 2 > Y - upLimite)
-                Y = upLimite + Height / 2;
-
-            if (X > rightLimite - Width / 2)
-                X = rightLimite - Width / 2;
-
-            if (Y > downLimite - Height / 2)
-                Y = downLimite - Height / 2;
+            return isSticky ? "Sticky Ellipse" : "Ellipse";
         }
     }
 }

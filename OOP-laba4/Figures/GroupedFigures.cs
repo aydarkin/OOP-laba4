@@ -89,7 +89,7 @@ namespace OOP_laba4.Figures
             {
                 figure = figures.Current();
 
-                if (left > figure.X - figure.Width/2)
+                if (left > figure.X - figure.Width / 2)
                     left = figure.X - figure.Width / 2;
                 if (right < figure.X + figure.Width / 2)
                     right = figure.X + figure.Width / 2;
@@ -110,28 +110,61 @@ namespace OOP_laba4.Figures
             for (figures.First(); !figures.EOL; figures.Next())
                 figures.Current().Move(dx, dy);
             setSize();
+            NotifyAll("Move", new object[] { dx, dy });
         }
 
-        public override void Move(int dx, int dy, int leftLimite, int upLimite, int rightLimite, int downLimite)
+        public override void Fit(int leftLimite, int upLimite, int rightLimite, int downLimite)
         {
             int oldX = X;
             int oldY = Y;
-            int newX = X + dx; 
-            int newY = Y + dy;
             
-            if (newX < leftLimite + Width / 2)
-                newX = leftLimite + Width / 2;
-            if (newY < upLimite + Height / 2)
-                newY = upLimite + Height / 2;
-            if (newX > rightLimite - Width / 2)
-                newX = rightLimite - Width / 2;
-            if (newY > downLimite - Width / 2)
-                newY = downLimite - Width / 2;
+            if (X < leftLimite + Width / 2)
+                X = leftLimite + Width / 2;
+            if (Y < upLimite + Height / 2)
+                Y = upLimite + Height / 2;
+            if (X > rightLimite - Width / 2)
+                X = rightLimite - Width / 2;
+            if (Y > downLimite - Width / 2)
+                Y = downLimite - Width / 2;
 
             for (figures.First(); !figures.EOL; figures.Next())
-                figures.Current().Move(newX - oldX, newY - oldY);
-            X = newX;
-            Y = newY;
+                figures.Current().Move(X - oldX, Y - oldY);
+            NotifyAll("Move", new object[] { X - oldX, Y - oldY });
+        }
+
+        public override void SetColor(Color color)
+        {
+            for (figures.First(); !figures.EOL; figures.Next())
+                figures.Current().SetColor(color);
+        }
+
+        public override void Resize(int width, int height, bool isAdditional = false)
+        {
+            for (figures.First(); !figures.EOL; figures.Next())
+            {
+                figures.Current().Resize(width, height, isAdditional);
+            }
+            setSize();
+        }
+
+        public override void SetSticky()
+        {
+            for (figures.First(); !figures.EOL; figures.Next())
+            {
+                figures.Current().SetSticky();
+            }
+        }
+        public override void UnsetSticky()
+        {
+            for (figures.First(); !figures.EOL; figures.Next())
+            {
+                figures.Current().UnsetSticky();
+            }
+        }
+
+        public override string ToString()
+        {
+            return isSticky ? "Sticky Group" : "Group";
         }
     }
 }
