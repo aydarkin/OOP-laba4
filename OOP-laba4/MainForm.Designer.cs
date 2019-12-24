@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.PaintPanel = new System.Windows.Forms.Panel();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.удалитьВыделенныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,6 +38,7 @@
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.SetColorBtn = new System.Windows.Forms.Button();
             this.ChooseInstrumentBox = new System.Windows.Forms.GroupBox();
+            this.StickyCheck = new System.Windows.Forms.CheckBox();
             this.SelectRB = new System.Windows.Forms.RadioButton();
             this.TriangleRB = new System.Windows.Forms.RadioButton();
             this.RectangleRB = new System.Windows.Forms.RadioButton();
@@ -70,10 +72,9 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GroupBtn = new System.Windows.Forms.Button();
             this.UngroupBtn = new System.Windows.Forms.Button();
-            this.StickyCheck = new System.Windows.Forms.CheckBox();
-            this.treeViewObserver = new OOP_laba4.TreeViewObserver();
             this.SetStickyBtn = new System.Windows.Forms.Button();
             this.UnsetStickyBtn = new System.Windows.Forms.Button();
+            this.treeViewObserver = new OOP_laba4.TreeViewObserver();
             this.contextMenu.SuspendLayout();
             this.ChooseInstrumentBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNum)).BeginInit();
@@ -160,9 +161,19 @@
             this.ChooseInstrumentBox.Location = new System.Drawing.Point(11, 50);
             this.ChooseInstrumentBox.Name = "ChooseInstrumentBox";
             this.ChooseInstrumentBox.Size = new System.Drawing.Size(144, 162);
-            this.ChooseInstrumentBox.TabIndex = 2;
+            this.ChooseInstrumentBox.TabIndex = 1;
             this.ChooseInstrumentBox.TabStop = false;
             this.ChooseInstrumentBox.Text = "Инструмент";
+            // 
+            // StickyCheck
+            // 
+            this.StickyCheck.AutoSize = true;
+            this.StickyCheck.Location = new System.Drawing.Point(19, 132);
+            this.StickyCheck.Name = "StickyCheck";
+            this.StickyCheck.Size = new System.Drawing.Size(64, 17);
+            this.StickyCheck.TabIndex = 4;
+            this.StickyCheck.Text = "Липкий";
+            this.StickyCheck.UseVisualStyleBackColor = true;
             // 
             // SelectRB
             // 
@@ -182,7 +193,7 @@
             this.TriangleRB.Location = new System.Drawing.Point(19, 101);
             this.TriangleRB.Name = "TriangleRB";
             this.TriangleRB.Size = new System.Drawing.Size(90, 17);
-            this.TriangleRB.TabIndex = 0;
+            this.TriangleRB.TabIndex = 3;
             this.TriangleRB.Text = "Треугольник";
             this.TriangleRB.UseVisualStyleBackColor = true;
             // 
@@ -192,7 +203,7 @@
             this.RectangleRB.Location = new System.Drawing.Point(19, 78);
             this.RectangleRB.Name = "RectangleRB";
             this.RectangleRB.Size = new System.Drawing.Size(105, 17);
-            this.RectangleRB.TabIndex = 0;
+            this.RectangleRB.TabIndex = 2;
             this.RectangleRB.Text = "Прямоугольник";
             this.RectangleRB.UseVisualStyleBackColor = true;
             // 
@@ -202,7 +213,7 @@
             this.EllipseRB.Location = new System.Drawing.Point(19, 55);
             this.EllipseRB.Name = "EllipseRB";
             this.EllipseRB.Size = new System.Drawing.Size(62, 17);
-            this.EllipseRB.TabIndex = 0;
+            this.EllipseRB.TabIndex = 1;
             this.EllipseRB.Text = "Эллипс";
             this.EllipseRB.UseVisualStyleBackColor = true;
             // 
@@ -239,7 +250,7 @@
             0});
             this.WidthNum.Name = "WidthNum";
             this.WidthNum.Size = new System.Drawing.Size(62, 20);
-            this.WidthNum.TabIndex = 1;
+            this.WidthNum.TabIndex = 5;
             this.WidthNum.Value = new decimal(new int[] {
             50,
             0,
@@ -261,7 +272,7 @@
             0});
             this.HeightNum.Name = "HeightNum";
             this.HeightNum.Size = new System.Drawing.Size(62, 20);
-            this.HeightNum.TabIndex = 1;
+            this.HeightNum.TabIndex = 4;
             this.HeightNum.Value = new decimal(new int[] {
             50,
             0,
@@ -315,6 +326,7 @@
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.White;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.файлToolStripMenuItem,
             this.правкаToolStripMenuItem,
@@ -485,26 +497,6 @@
             this.UngroupBtn.UseVisualStyleBackColor = true;
             this.UngroupBtn.Click += new System.EventHandler(this.UngroupBtn_Click);
             // 
-            // StickyCheck
-            // 
-            this.StickyCheck.AutoSize = true;
-            this.StickyCheck.Location = new System.Drawing.Point(19, 132);
-            this.StickyCheck.Name = "StickyCheck";
-            this.StickyCheck.Size = new System.Drawing.Size(64, 17);
-            this.StickyCheck.TabIndex = 1;
-            this.StickyCheck.Text = "Липкий";
-            this.StickyCheck.UseVisualStyleBackColor = true;
-            // 
-            // treeViewObserver
-            // 
-            this.treeViewObserver.CheckBoxes = true;
-            this.treeViewObserver.Location = new System.Drawing.Point(787, 50);
-            this.treeViewObserver.Name = "treeViewObserver";
-            this.treeViewObserver.Size = new System.Drawing.Size(160, 466);
-            this.treeViewObserver.TabIndex = 9;
-            this.treeViewObserver.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewObserver_AfterCheck);
-            this.treeViewObserver.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewObserver_NodeMouseClick);
-            // 
             // SetStickyBtn
             // 
             this.SetStickyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -527,10 +519,21 @@
             this.UnsetStickyBtn.UseVisualStyleBackColor = true;
             this.UnsetStickyBtn.Click += new System.EventHandler(this.UnsetStickyBtn_Click);
             // 
+            // treeViewObserver
+            // 
+            this.treeViewObserver.CheckBoxes = true;
+            this.treeViewObserver.Location = new System.Drawing.Point(787, 50);
+            this.treeViewObserver.Name = "treeViewObserver";
+            this.treeViewObserver.Size = new System.Drawing.Size(160, 466);
+            this.treeViewObserver.TabIndex = 9;
+            this.treeViewObserver.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewObserver_AfterCheck);
+            this.treeViewObserver.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewObserver_NodeMouseClick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(959, 639);
             this.Controls.Add(this.treeViewObserver);
             this.Controls.Add(this.Tool);
@@ -551,10 +554,11 @@
             this.Controls.Add(this.SetStickyBtn);
             this.Controls.Add(this.RemoveBtn);
             this.Controls.Add(this.PaintPanel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "MainForm";
-            this.Text = "Abode Illuztractor CS6";
+            this.Text = "My little paint";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.contextMenu.ResumeLayout(false);

@@ -22,6 +22,17 @@ namespace OOP_laba4.Commands
             this.figures = figures;
             this.x = x;
             this.y = y;
+            var it = figures.CreateIterator();
+            for (it.Last(); !it.EOL; it.Prev())
+            {
+                figure = it.GetCurrent().Value;
+                if (figure.isPointInFigure(x, y))
+                {
+                    selected = !figure.Selected;
+                    return;
+                }          
+            }
+
         }
         public SelectFigureCommand(Storage<Figure> figures, Figure figure, bool selected)
         {
@@ -33,31 +44,17 @@ namespace OOP_laba4.Commands
         public ICommand Clone()
         {
             var com = new SelectFigureCommand(figures, x, y);
-            com.figure = this.figure;
+            com.selected = selected;
+            com.oldSelected = oldSelected;
+            com.figure = figure;
             return com;
         }
 
         public void Execute()
         {
-            if(figure != null)
-            {
-                oldSelected = figure.Selected;
-                figure.Selected = selected;
-                return;
-            }
-
-            var it = figures.CreateIterator();
-            for (it.Last(); !it.EOL; it.Prev())
-            {
-                figure = it.GetCurrent().Value;
-                if (figure.isPointInFigure(x, y))
-                {
-                    oldSelected = figure.Selected;
-                    figure.RevertSelection();
-                    figures.NotifyAll();
-                    return;
-                }
-            }
+            oldSelected = figure.Selected;
+            figure.Selected = selected;
+            figures.NotifyAll();
         }
 
         public void Unexecute()

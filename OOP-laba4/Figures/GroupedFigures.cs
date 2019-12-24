@@ -77,6 +77,8 @@ namespace OOP_laba4.Figures
             {
                 var pen = new Pen(Color.Red, 2f);
                 pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+                if (isSticky)
+                    pen.Color = Color.LightGreen;
                 g.DrawRectangle(pen, X - Width / 2, Y - Height / 2, Width, Height);
             }
         }
@@ -147,20 +149,7 @@ namespace OOP_laba4.Figures
             setSize();
         }
 
-        public override void SetSticky()
-        {
-            for (figures.First(); !figures.EOL; figures.Next())
-            {
-                figures.Current().SetSticky();
-            }
-        }
-        public override void UnsetSticky()
-        {
-            for (figures.First(); !figures.EOL; figures.Next())
-            {
-                figures.Current().UnsetSticky();
-            }
-        }
+
 
         public override string ToString()
         {

@@ -83,6 +83,9 @@ namespace OOP_laba4.Figures
 
         public virtual void Fit(int leftLimite, int upLimite, int rightLimite, int downLimite) 
         {
+            int oldX = X;
+            int oldY = Y;
+
             if (X < leftLimite + Width / 2)
                 X = leftLimite + Width / 2;
             if (Y < upLimite + Height / 2)
@@ -91,6 +94,8 @@ namespace OOP_laba4.Figures
                 X = rightLimite - Width / 2;
             if (Y > downLimite - Width / 2)
                 Y = downLimite - Width / 2;
+
+            NotifyAll("Move", new object[] { X - oldX, Y - oldY });
         }
 
         public virtual void Resize(int width, int height, bool isAdditional = false)

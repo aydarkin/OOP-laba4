@@ -111,10 +111,15 @@ namespace OOP_laba4.Commands
         {
             foreach(var f in transferedFigures)
             {
-                int dx = f.Value.X - f.Key.X;
-                int dy = f.Value.Y - f.Key.Y;
-
-                f.Key.Move(dx, dy);
+                if(f.Key is GroupedFigures)
+                    //здесь проблема, временное решение
+                    f.Key.Move(f.Value.X - f.Key.X, f.Value.Y - f.Key.Y);
+                else
+                {
+                    f.Key.X = f.Value.X;
+                    f.Key.Y = f.Value.Y;
+                }
+                
             }
             figures.NotifyAll();
         }
